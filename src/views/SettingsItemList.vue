@@ -27,6 +27,7 @@ import { ColumnDefinition } from '@tager/admin-ui';
 import { SettingsItemType } from '../typings/model';
 import { getSettingsItemList } from '../services/requests';
 import { COMMON_SETTINGS_ROUTE_PATHS } from '../constants/paths';
+import { getFileSize } from '../utils/common';
 
 const COLUMN_DEFS: Array<ColumnDefinition<SettingsItemType>> = [
   { id: 1, name: 'Name', field: 'label' },
@@ -35,6 +36,19 @@ const COLUMN_DEFS: Array<ColumnDefinition<SettingsItemType>> = [
     name: 'Value',
     field: 'value',
     type: ({ row }) => (row.type === 'IMAGE' ? 'image' : 'string'),
+    format: ({ row }) => {
+      if (row.type === 'FILE' && row.value) {
+        const file = row.value;
+        const fileSize = getFileSize(file.size);
+        return `${file.name} - ${fileSize}`;
+      }
+
+      if (row.type === 'GALLERY') {
+        return `${row.value.length} image${row.value.length === 1 ? '' : 's'}`;
+      }
+
+      return row.value;
+    },
   },
   {
     id: 3,

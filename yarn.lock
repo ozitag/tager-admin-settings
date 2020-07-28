@@ -950,17 +950,17 @@
   dependencies:
     "@babel/runtime" "^7.10.4"
 
-"@tager/admin-services@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@tager/admin-services/-/admin-services-0.1.6.tgz#ec300e279af67f478433bc09a1313a6a03fb4b52"
-  integrity sha512-QZgYprMn5LRkicfHOZZLQFDGPX+z0vC7Gex6A+mvoWgb7tcUT7csIx6AxOd0DksNHnXZnvUNRA8Ae/6MMF9RdA==
+"@tager/admin-services@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@tager/admin-services/-/admin-services-0.1.7.tgz#cfd845c48b735c94fc86f52df4a7030b05bb5737"
+  integrity sha512-YiaAF0v9hbVHn/aGJchx/eR8Ic5PijujD4YuOTIoPYLl2fqtZcGscPiFuCU/ey5xNgqjpWMZKxGC3fIr5QMytA==
   dependencies:
     i18next "^19.5.4"
 
-"@tager/admin-ui@^0.4.19":
-  version "0.4.19"
-  resolved "https://registry.yarnpkg.com/@tager/admin-ui/-/admin-ui-0.4.19.tgz#bf1e7dd2feb1196184c96629c37f6dce6699bc28"
-  integrity sha512-g5F55ufjjEMidaxbMy6wpl6RgM5HbDniadPQElqGru+6HIxONIJD5GX07siG7bhkGmrKqNJEuIWc8C2JreBcGg==
+"@tager/admin-ui@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@tager/admin-ui/-/admin-ui-0.5.1.tgz#57207d52098b85984239753a7a7bbc67985f54a9"
+  integrity sha512-t3NyCMALMoVrZwDlz3ib45DwSIVe6ZJ83JSPueiZgCj0YFreAQ+MBSIgA2a5xmG/b/C7fzT2aMwf1bGW6tQnKw==
   dependencies:
     "@babel/runtime" "^7.10.2"
     "@ckeditor/ckeditor5-build-classic" "^19.0.2"

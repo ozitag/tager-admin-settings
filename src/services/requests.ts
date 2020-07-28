@@ -16,7 +16,9 @@ export function getSettingsItem(
   return request.get({ path: `/settings/${itemId}` });
 }
 
-export type SettingsItemUpdatePayload = { value: string | number | null };
+export type SettingsItemUpdatePayload = {
+  value: string | number | Array<number> | null;
+};
 
 export function updateSettingsItem(
   itemId: number | string,
