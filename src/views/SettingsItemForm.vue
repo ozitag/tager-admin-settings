@@ -37,7 +37,7 @@ import {
   updateSettingsItem,
 } from '../services/requests';
 import { SettingsItemType } from '../typings/model';
-import { COMMON_SETTINGS_ROUTE_PATHS } from '../constants/paths';
+import { getSettingItemListUrl } from '../utils/paths';
 
 type FormValues = Pick<SettingsItemType, 'value'>;
 
@@ -57,7 +57,7 @@ export default Vue.extend({
       errors: {},
       isSubmitting: false,
       isInitialLoading: false,
-      settingsItemListRoutePath: COMMON_SETTINGS_ROUTE_PATHS.ITEM_LIST,
+      settingsItemListRoutePath: getSettingItemListUrl(),
     };
   },
   computed: {
@@ -122,7 +122,7 @@ export default Vue.extend({
       updateSettingsItem(this.itemId, body)
         .then(() => {
           this.errors = {};
-          this.$router.push(COMMON_SETTINGS_ROUTE_PATHS.ITEM_LIST);
+          this.$router.push(getSettingItemListUrl());
 
           this.$toast({
             variant: 'success',

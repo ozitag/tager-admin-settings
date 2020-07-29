@@ -7,13 +7,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import { MenuItemType } from '@tager/admin-layout';
-
-import { COMMON_SETTINGS_ROUTE_PATHS } from '../constants/paths';
+import { getSettingItemListUrl } from '../utils/paths';
 
 export const COMMON_SETTINGS_MENU_ITEM: MenuItemType = {
   id: 'settings',
   name: 'Common Settings',
-  path: COMMON_SETTINGS_ROUTE_PATHS.ITEM_LIST,
+  path: getSettingItemListUrl(),
   icon: 'settings',
 };
 

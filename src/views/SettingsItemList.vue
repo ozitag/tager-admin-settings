@@ -21,12 +21,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { compile } from 'path-to-regexp';
 import { ColumnDefinition } from '@tager/admin-ui';
 
 import { SettingsItemType } from '../typings/model';
 import { getSettingsItemList } from '../services/requests';
-import { COMMON_SETTINGS_ROUTE_PATHS } from '../constants/paths';
+import { getSettingItemFormUrl } from '../utils/paths';
 
 const COLUMN_DEFS: Array<ColumnDefinition<SettingsItemType>> = [
   { id: 1, name: 'Name', field: 'label' },
@@ -75,7 +74,7 @@ export default Vue.extend({
         });
     },
     getSettingsItemPageHref(itemId: number): string {
-      return compile(COMMON_SETTINGS_ROUTE_PATHS.ITEM_FORM)({ itemId });
+      return getSettingItemFormUrl({ itemId });
     },
   },
 });

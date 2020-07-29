@@ -7,13 +7,13 @@ import { SettingsItemType } from '../typings/model';
 export function getSettingsItemList(): Promise<
   ResponseBody<Array<SettingsItemType>>
 > {
-  return request.get({ path: '/settings' });
+  return request.get({ path: '/admin/settings' });
 }
 
 export function getSettingsItem(
   itemId: number | string
 ): Promise<ResponseBody<SettingsItemType>> {
-  return request.get({ path: `/settings/${itemId}` });
+  return request.get({ path: `/admin/settings/${itemId}` });
 }
 
 export type SettingsItemUpdatePayload = { value: string | number | null };
@@ -22,5 +22,5 @@ export function updateSettingsItem(
   itemId: number | string,
   payload: SettingsItemUpdatePayload
 ): Promise<ResponseBody<SettingsItemType>> {
-  return request.put({ path: `/settings/${itemId}`, body: payload });
+  return request.put({ path: `/admin/settings/${itemId}`, body: payload });
 }
