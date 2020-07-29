@@ -9,8 +9,13 @@ interface SettingsItem {
 }
 
 interface SettingsItemFile extends SettingsItem {
-  type: 'IMAGE';
+  type: 'IMAGE' | 'FILE';
   value: Nullable<FileType>;
+}
+
+interface SettingsItemFileList extends SettingsItem {
+  type: 'GALLERY';
+  value: Array<FileType>;
 }
 
 interface SettingsItemString extends SettingsItem {
@@ -18,4 +23,7 @@ interface SettingsItemString extends SettingsItem {
   value: Nullable<string>;
 }
 
-export type SettingsItemType = SettingsItemFile | SettingsItemString;
+export type SettingsItemType =
+  | SettingsItemFile
+  | SettingsItemFileList
+  | SettingsItemString;

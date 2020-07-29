@@ -67,15 +67,21 @@ export default Vue.extend({
     valueFieldType(): string {
       switch (this.settingsItem?.type) {
         case 'IMAGE':
+        case 'FILE':
+        case 'GALLERY':
           return 'form-field-file-input';
         default:
           return 'form-field';
       }
     },
-    valueFieldAttrs(): Record<string, string | number> {
+    valueFieldAttrs(): Record<string, string | number | boolean> {
       switch (this.settingsItem?.type) {
+        case 'GALLERY':
+          return { fileType: 'image', multiple: true };
         case 'IMAGE':
           return { fileType: 'image' };
+        case 'FILE':
+          return {};
         case 'TEXT':
           return { type: 'textarea', rows: 4 };
         default:
@@ -106,9 +112,16 @@ export default Vue.extend({
     },
     convertFormValuesToRequest(): SettingsItemUpdatePayload {
       switch (this.settingsItem?.type ?? 'STRING') {
+        case 'FILE':
         case 'IMAGE':
           return {
             value: (this.values.value as Nullable<FileType>)?.id ?? null,
+          };
+        case 'GALLERY':
+          return {
+            value: (this.values.value as Array<FileType>).map(
+              (file) => file.id
+            ),
           };
         default:
           return { value: this.values.value as string };
