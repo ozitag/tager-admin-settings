@@ -5,7 +5,7 @@ import SettingsItemForm from '../views/SettingsItemForm.vue';
 
 import { COMMON_SETTINGS_ROUTE_PATHS } from './paths';
 
-const HOME_BREADCRUMB = { path: '/', label: 'Home' };
+const HOME_BREADCRUMB = { url: '/', text: 'Home' };
 
 export const SETTINGS_ITEM_LIST_ROUTE: CustomRouteConfig = {
   path: COMMON_SETTINGS_ROUTE_PATHS.ITEM_LIST,
@@ -14,7 +14,7 @@ export const SETTINGS_ITEM_LIST_ROUTE: CustomRouteConfig = {
   meta: {
     getBreadcrumbs: (route) => [
       HOME_BREADCRUMB,
-      { path: route.path, label: route.name },
+      { url: route.path, text: route.name ?? '' },
     ],
   },
 };
@@ -27,10 +27,10 @@ export const SETTINGS_ITEM_FORM_ROUTE: CustomRouteConfig = {
     getBreadcrumbs: (route) => [
       HOME_BREADCRUMB,
       {
-        path: COMMON_SETTINGS_ROUTE_PATHS.ITEM_LIST,
-        label: SETTINGS_ITEM_LIST_ROUTE.name,
+        url: COMMON_SETTINGS_ROUTE_PATHS.ITEM_LIST,
+        text: SETTINGS_ITEM_LIST_ROUTE.name ?? '',
       },
-      { path: route.path, label: route.name },
+      { url: route.path, text: route.name ?? '' },
     ],
   },
 };

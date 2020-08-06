@@ -11,8 +11,8 @@ import { getSettingItemListUrl } from '../utils/paths';
 
 export const COMMON_SETTINGS_MENU_ITEM: MenuItemType = {
   id: 'settings',
-  name: 'Common Settings',
-  path: getSettingItemListUrl(),
+  text: 'Common Settings',
+  url: getSettingItemListUrl(),
   icon: 'settings',
 };
 

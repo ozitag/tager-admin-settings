@@ -36,8 +36,11 @@ const COLUMN_DEFS: Array<ColumnDefinition<SettingsItemType>> = [
     field: 'value',
     type: ({ row }) => (row.type === 'IMAGE' ? 'image' : 'string'),
     format: ({ row }) => {
-      if (row.type === 'FILE' && row.value) {
+      if (row.type === 'FILE') {
         const file = row.value;
+
+        if (!file) return '';
+
         const fileSize = getFileSize(file.size);
         return `${file.name} - ${fileSize}`;
       }
