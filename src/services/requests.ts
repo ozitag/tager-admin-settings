@@ -1,11 +1,11 @@
 import { request, ResponseBody } from '@tager/admin-services';
 
-import { SettingsItemType } from '../typings/model';
+import { SettingsItemType, SettingsSectionType } from '../typings/model';
 
 /** Blog Posts */
 
-export function getSettingsItemList(): Promise<
-  ResponseBody<Array<SettingsItemType>>
+export function getSettingsSectionList(): Promise<
+  ResponseBody<Array<SettingsSectionType>>
 > {
   return request.get({ path: '/admin/settings' });
 }

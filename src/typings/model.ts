@@ -27,3 +27,8 @@ export type SettingsItemType =
   | SettingsItemFile
   | SettingsItemFileList
   | SettingsItemString;
+
+export type SettingsSectionType = {
+  name: string;
+  fields: Array<SettingsItemType>;
+};
