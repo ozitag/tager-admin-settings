@@ -1,6 +1,6 @@
 <template>
   <li class="settings-section">
-    <div class="title-row" @click="toggleOpen">
+    <div v-if="!shouldAlwaysDisplay" class="title-row" @click="toggleOpen">
       <h3 v-if="section.name">{{ section.name }}</h3>
       <base-button variant="icon">
         <svg-icon :name="isOpen ? 'expandLess' : 'expandMore'" />
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api';
+import { computed, defineComponent, ref } from '@vue/composition-api';
 import { ColumnDefinition } from '@tager/admin-ui';
 
 import { SettingsItemType, SettingsSectionType } from '../../../typings/model';
@@ -80,7 +80,9 @@ export default defineComponent<Props>({
     },
   },
   setup(props) {
-    const isOpen = ref<boolean>(false);
+    const shouldAlwaysDisplay = computed<boolean>(() => !props.section.name);
+
+    const isOpen = ref<boolean>(shouldAlwaysDisplay.value);
 
     function toggleOpen() {
       isOpen.value = !isOpen.value;
@@ -94,6 +96,7 @@ export default defineComponent<Props>({
       section: props.section,
       isOpen,
       toggleOpen,
+      shouldAlwaysDisplay,
     };
   },
 });
