@@ -93,7 +93,6 @@ export default defineComponent<Props>({
       isRowDataLoading: false,
       columnDefs: COLUMN_DEFS,
       getSettingItemFormUrl,
-      section: props.section,
       isOpen,
       toggleOpen,
       shouldAlwaysDisplay,

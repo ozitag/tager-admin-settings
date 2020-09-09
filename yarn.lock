@@ -952,17 +952,18 @@
   dependencies:
     "@babel/runtime" "^7.10.4"
 
-"@tager/admin-services@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@tager/admin-services/-/admin-services-0.2.4.tgz#bb6d54272bf282e98a073f0d62b9a27c651856a7"
-  integrity sha512-YHTeYZkvh1Hx1xGhb2Xs7ZPDJ4gve4M316xmH2zBJrd5S+GwemGpuJymy9vhsCsQ1ImJnG3cKIqlXq13kUNaAA==
+"@tager/admin-services@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@tager/admin-services/-/admin-services-0.2.7.tgz#7fb608ae8b65cde3395a7b7d95fa6f998c01755f"
+  integrity sha512-C6b3Uuh1dTUtDqZfTQJCr7gQE9X3BXFXUvm3vFxIsfP9n1018LUQCAS2STCewaj5tkUryppxhM8LVi0XGLP5Ew==
   dependencies:
     i18next "^19.6.3"
+    typed-contracts "^2.3.0"
 
-"@tager/admin-ui@^0.6.11":
-  version "0.6.11"
-  resolved "https://registry.yarnpkg.com/@tager/admin-ui/-/admin-ui-0.6.11.tgz#dac7217898cba6da7aade5cee2130576835a9cdf"
-  integrity sha512-OAl3VeJbBIZphntfr6q22at/D6F9TF3Bb+ObvohUAzJX2TrqG3Hns2lxFMP3+orb7vwj3gCZRDpXhalT5QBKCQ==
+"@tager/admin-ui@^0.6.13":
+  version "0.6.13"
+  resolved "https://registry.yarnpkg.com/@tager/admin-ui/-/admin-ui-0.6.13.tgz#177b8a086fb566e53644c81f03d7fe4aba9adca0"
+  integrity sha512-LVdRGXXz2HkgX5OMK1nt5Vm/iOvqO0Wc56O765oVr3zp7QJW+J0U/2Pq54LAotkuCbYb3iyBfZwCrbtZeOBtRg==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@ckeditor/ckeditor5-vue" "^1.0.1"
@@ -8577,6 +8578,13 @@ type-is@~1.6.17, type-is@~1.6.18:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.24"
+
+typed-contracts@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/typed-contracts/-/typed-contracts-2.3.0.tgz#97c9fa03c37ac0294769f5f815c7d34d3dd6a3f3"
+  integrity sha512-ySdcDiGcCzO4ymhub98B2kwu1DAQ4WvZM2SCjFVEAkZgEBked2X3mz6YRahNcgULn989/hizbuOqaNgEw6E5XQ==
+  dependencies:
+    core-js "^3.6.5"
 
 typedarray@^0.0.6:
   version "0.0.6"
