@@ -1,6 +1,11 @@
 import { request, ResponseBody } from '@tager/admin-services';
 
-import { SettingsItemType, SettingsSectionType } from '../typings/model';
+import {
+  OutgoingFieldUnion,
+  SettingItemFullType,
+  SettingsItemType,
+  SettingsSectionType,
+} from '../typings/model';
 
 /** Blog Posts */
 
@@ -12,12 +17,12 @@ export function getSettingsSectionList(): Promise<
 
 export function getSettingsItem(
   itemId: number | string
-): Promise<ResponseBody<SettingsItemType>> {
+): Promise<ResponseBody<SettingItemFullType>> {
   return request.get({ path: `/admin/settings/${itemId}` });
 }
 
 export type SettingsItemUpdatePayload = {
-  value: string | number | Array<number> | null;
+  value: OutgoingFieldUnion['value'];
 };
 
 export function updateSettingsItem(

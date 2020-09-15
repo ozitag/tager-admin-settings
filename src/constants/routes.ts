@@ -1,7 +1,7 @@
 import { CustomRouteConfig } from '@tager/admin-layout';
 
 import SettingsSectionList from '../views/SettingsSectionList';
-import SettingsItemForm from '../views/SettingsItemForm.vue';
+import SettingsItemForm from '../views/SettingsItemForm';
 
 import { COMMON_SETTINGS_ROUTE_PATHS } from './paths';
 
