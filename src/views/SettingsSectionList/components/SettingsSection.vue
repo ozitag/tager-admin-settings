@@ -33,6 +33,7 @@ import { ColumnDefinition } from '@tager/admin-ui';
 import { SettingsItemType, SettingsSectionType } from '../../../typings/model';
 import { getFileSize } from '../../../utils/common';
 import { getSettingItemFormUrl } from '../../../utils/paths';
+import { isSectionOpen, toggleSection } from '../SettingsSectionList.helpers';
 
 const COLUMN_DEFS: Array<ColumnDefinition<SettingsItemType>> = [
   { id: 1, name: 'Name', field: 'label' },
@@ -82,10 +83,13 @@ export default defineComponent<Props>({
   setup(props) {
     const shouldAlwaysDisplay = computed<boolean>(() => !props.section.name);
 
-    const isOpen = ref<boolean>(shouldAlwaysDisplay.value);
+    const isOpen = ref<boolean>(
+      shouldAlwaysDisplay.value || isSectionOpen(props.section.name)
+    );
 
     function toggleOpen() {
       isOpen.value = !isOpen.value;
+      toggleSection(props.section.name);
     }
 
     return {
