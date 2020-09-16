@@ -10,12 +10,20 @@
     }"
   >
     <form novalidate @submit.prevent>
-      <TemplateField v-if="values" :field="values" />
+      <DynamicField v-if="values" :field="values" />
     </form>
   </page>
 </template>
 
 <script lang="ts">
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  ref,
+  watch,
+} from '@vue/composition-api';
+
 import { convertRequestErrorToMap, useResource } from '@tager/admin-services';
 
 import {
@@ -24,23 +32,17 @@ import {
   updateSettingsItem,
 } from '../../services/requests';
 import { getSettingItemListUrl } from '../../utils/paths';
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  ref,
-  watch,
-} from '@vue/composition-api';
+
 import {
   convertSettingItemFormValuesToUpdatePayload,
   FormValues,
   getSettingsFormValues,
 } from './SettingsItemForm.helpers';
-import TemplateField from './components/TemplateField.vue';
+import DynamicField from './components/DynamicField.vue';
 
 export default defineComponent({
   name: 'SettingsItemForm',
-  components: { TemplateField },
+  components: { DynamicField },
   setup(props, context) {
     const settingItemId = computed<string>(
       () => context.root.$route.params.itemId
@@ -104,7 +106,7 @@ export default defineComponent({
     }
 
     const pageTitle = computed<string>(
-      () => settingItem.value?.template.label ?? ''
+      () => settingItem.value?.config.label ?? ''
     );
 
     const isContentLoading = computed<boolean>(

@@ -1,7 +1,7 @@
 import { request, ResponseBody } from '@tager/admin-services';
 
 import {
-  OutgoingFieldUnion,
+  OutgoingValueUnion,
   SettingItemFullType,
   SettingsItemType,
   SettingsSectionType,
@@ -22,7 +22,7 @@ export function getSettingsItem(
 }
 
 export type SettingsItemUpdatePayload = {
-  value: OutgoingFieldUnion['value'];
+  value: OutgoingValueUnion;
 };
 
 export function updateSettingsItem(

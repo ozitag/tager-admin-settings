@@ -1,10 +1,6 @@
 import { Nullable } from '@tager/admin-services';
 
-import {
-  FieldUnion,
-  IncomingFieldUnion,
-  SettingItemFullType,
-} from '../../typings/model';
+import { FieldUnion, SettingItemFullType } from '../../typings/model';
 import { SettingsItemUpdatePayload } from '../../services/requests';
 import { universalFieldUtils } from '../../services/fields';
 
@@ -19,12 +15,10 @@ export function getSettingsFormValues(
     return INITIAL_VALUES;
   }
 
-  const incomingField = {
-    value: settingItem.value,
-    name: settingItem.template.name,
-  } as IncomingFieldUnion;
-
-  return universalFieldUtils.createField(settingItem.template, incomingField);
+  return universalFieldUtils.createFormField(
+    settingItem.config,
+    settingItem.value
+  );
 }
 
 export function convertSettingItemFormValuesToUpdatePayload(
@@ -34,5 +28,5 @@ export function convertSettingItemFormValuesToUpdatePayload(
     throw new Error('values cannot be null');
   }
 
-  return universalFieldUtils.getOutgoingField(values);
+  return { value: universalFieldUtils.getOutgoingValue(values) };
 }

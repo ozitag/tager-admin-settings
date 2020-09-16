@@ -28,6 +28,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from '@vue/composition-api';
+
 import { ColumnDefinition } from '@tager/admin-ui';
 
 import { SettingsItemType, SettingsSectionType } from '../../../typings/model';

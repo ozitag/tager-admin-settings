@@ -6,7 +6,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 import { MenuItemType } from '@tager/admin-layout';
+
 import { getSettingItemListUrl } from '../utils/paths';
 
 export const COMMON_SETTINGS_MENU_ITEM: MenuItemType = {

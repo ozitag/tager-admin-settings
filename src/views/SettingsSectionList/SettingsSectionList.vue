@@ -11,8 +11,9 @@
 </template>
 
 <script lang="ts">
-import { useResource } from '@tager/admin-services';
 import { defineComponent, onMounted } from '@vue/composition-api';
+
+import { useResource } from '@tager/admin-services';
 
 import { getSettingsSectionList } from '../../services/requests';
 import { SettingsSectionType } from '../../typings/model';
