@@ -25,6 +25,7 @@ import {
 } from '@vue/composition-api';
 
 import { convertRequestErrorToMap, useResource } from '@tager/admin-services';
+import { DynamicField } from '@tager/admin-fields';
 
 import {
   getSettingsItem,
@@ -38,7 +39,6 @@ import {
   FormValues,
   getSettingsFormValues,
 } from './SettingsItemForm.helpers';
-import DynamicField from './components/DynamicField.vue';
 
 export default defineComponent({
   name: 'SettingsItemForm',
