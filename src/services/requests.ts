@@ -1,5 +1,5 @@
 import { request, ResponseBody } from '@tager/admin-services';
-import { OutgoingValueUnion } from '@tager/admin-fields';
+import { OutgoingValueUnion } from '@tager/admin-dynamic-field';
 
 import {
   SettingItemFullType,

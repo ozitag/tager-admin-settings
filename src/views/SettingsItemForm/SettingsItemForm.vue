@@ -25,7 +25,7 @@ import {
 } from '@vue/composition-api';
 
 import { convertRequestErrorToMap, useResource } from '@tager/admin-services';
-import { DynamicField } from '@tager/admin-fields';
+import { DynamicField } from '@tager/admin-dynamic-field';
 
 import {
   getSettingsItem,

@@ -1,5 +1,8 @@
 import { Nullable, FileType } from '@tager/admin-services';
-import { FieldConfigUnion, IncomingValueUnion } from '@tager/admin-fields';
+import {
+  FieldConfigUnion,
+  IncomingValueUnion,
+} from '@tager/admin-dynamic-field';
 
 interface SettingsItem {
   id: number;

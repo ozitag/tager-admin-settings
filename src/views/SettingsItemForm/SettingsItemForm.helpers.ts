@@ -1,5 +1,5 @@
 import { Nullable } from '@tager/admin-services';
-import { FieldUnion, universalFieldUtils } from '@tager/admin-fields';
+import { FieldUnion, universalFieldUtils } from '@tager/admin-dynamic-field';
 
 import { SettingItemFullType } from '../../typings/model';
 import { SettingsItemUpdatePayload } from '../../services/requests';
