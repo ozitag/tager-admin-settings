@@ -26,6 +26,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
+    "@tager/admin-fields": "^0.1.1",
     "@tager/admin-layout": "^0.4.2",
     "@tager/admin-services": "^0.2.8",
     "@tager/admin-ui": "^0.6.13",
@@ -59,6 +60,7 @@
     "vue-template-compiler": "^2.6.11"
   },
   "peerDependencies": {
+    "@tager/admin-fields": ">=0.1.1",
     "@tager/admin-layout": ">=0.4.0",
     "@tager/admin-services": ">=0.2.2",
     "@tager/admin-ui": ">=0.6.1",

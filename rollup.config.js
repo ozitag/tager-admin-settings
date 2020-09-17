@@ -22,6 +22,7 @@ export default {
     '@tager/admin-services',
     '@tager/admin-ui',
     '@tager/admin-layout',
+    '@tager/admin-fields',
     'path-to-regexp',
   ],
   plugins: [

@@ -1,8 +1,8 @@
 import { Nullable } from '@tager/admin-services';
+import { FieldUnion, universalFieldUtils } from '@tager/admin-fields';
 
-import { FieldUnion, SettingItemFullType } from '../../typings/model';
+import { SettingItemFullType } from '../../typings/model';
 import { SettingsItemUpdatePayload } from '../../services/requests';
-import { universalFieldUtils } from '../../services/fields';
 
 export type FormValues = Nullable<FieldUnion>;
 

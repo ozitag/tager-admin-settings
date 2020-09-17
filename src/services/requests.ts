@@ -1,7 +1,7 @@
 import { request, ResponseBody } from '@tager/admin-services';
+import { OutgoingValueUnion } from '@tager/admin-fields';
 
 import {
-  OutgoingValueUnion,
   SettingItemFullType,
   SettingsItemType,
   SettingsSectionType,
