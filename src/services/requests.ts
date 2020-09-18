@@ -1,11 +1,7 @@
 import { request, ResponseBody } from '@tager/admin-services';
 import { OutgoingValueUnion } from '@tager/admin-dynamic-field';
 
-import {
-  SettingItemFullType,
-  SettingsItemType,
-  SettingsSectionType,
-} from '../typings/model';
+import { SettingItemType, SettingsSectionType } from '../typings/model';
 
 /** Blog Posts */
 
@@ -17,7 +13,7 @@ export function getSettingsSectionList(): Promise<
 
 export function getSettingsItem(
   itemId: number | string
-): Promise<ResponseBody<SettingItemFullType>> {
+): Promise<ResponseBody<SettingItemType>> {
   return request.get({ path: `/admin/settings/${itemId}` });
 }
 
@@ -28,6 +24,6 @@ export type SettingsItemUpdatePayload = {
 export function updateSettingsItem(
   itemId: number | string,
   payload: SettingsItemUpdatePayload
-): Promise<ResponseBody<SettingsItemType>> {
+): Promise<ResponseBody<SettingItemType>> {
   return request.put({ path: `/admin/settings/${itemId}`, body: payload });
 }

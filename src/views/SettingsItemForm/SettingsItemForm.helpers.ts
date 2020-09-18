@@ -1,7 +1,7 @@
 import { Nullable } from '@tager/admin-services';
 import { FieldUnion, universalFieldUtils } from '@tager/admin-dynamic-field';
 
-import { SettingItemFullType } from '../../typings/model';
+import { SettingItemType } from '../../typings/model';
 import { SettingsItemUpdatePayload } from '../../services/requests';
 
 export type FormValues = Nullable<FieldUnion>;
@@ -9,7 +9,7 @@ export type FormValues = Nullable<FieldUnion>;
 const INITIAL_VALUES: FormValues = null;
 
 export function getSettingsFormValues(
-  settingItem: Nullable<SettingItemFullType>
+  settingItem: Nullable<SettingItemType>
 ): FormValues {
   if (!settingItem) {
     return INITIAL_VALUES;

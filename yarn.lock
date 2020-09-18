@@ -985,13 +985,13 @@
   dependencies:
     "@babel/runtime" "^7.10.4"
 
-"@tager/admin-services@^0.2.8":
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/@tager/admin-services/-/admin-services-0.2.8.tgz#eead318f144a864310efb1b8e3f393c2dab5d1e6"
-  integrity sha512-YNY+r10TPer33zEnbJKonRitpAi9zcCDvNJ3QwdPfHutJsAufueEMsJtFy7OzNhWAHJZ+wRRNysgD1cSlqUAvA==
+"@tager/admin-services@^0.2.9":
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/@tager/admin-services/-/admin-services-0.2.9.tgz#a792a1cc3db6975dde924e3098089a4279cb4fa4"
+  integrity sha512-kLEFZr5GOtaSQlZpHNK3IK18/vKEx3DKt0gUw4oJqMFyyznJhORfqI+l4YbulXwou1QCGp/CRzp4PH5HLsWocw==
   dependencies:
     i18next "^19.7.0"
-    typed-contracts "^2.3.0"
+    zod "^1.11.8"
 
 "@tager/admin-ui@^0.6.13":
   version "0.6.14"
@@ -8844,13 +8844,6 @@ type-is@~1.6.17, type-is@~1.6.18:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-typed-contracts@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/typed-contracts/-/typed-contracts-2.3.0.tgz#97c9fa03c37ac0294769f5f815c7d34d3dd6a3f3"
-  integrity sha512-ySdcDiGcCzO4ymhub98B2kwu1DAQ4WvZM2SCjFVEAkZgEBked2X3mz6YRahNcgULn989/hizbuOqaNgEw6E5XQ==
-  dependencies:
-    core-js "^3.6.5"
-
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
@@ -9547,3 +9540,8 @@ yorkie@^2.0.0:
     is-ci "^1.0.10"
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
+
+zod@^1.11.8:
+  version "1.11.8"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-1.11.8.tgz#5e6b2eb3114c73d5043889fa9dfbab0b60a93ff6"
+  integrity sha512-iusmIB00ll0Fxzyhrp8EJPaJDTSyQMKMCwk2hH2XrtgY/QcygPJTX13fSof/r7b4hL5cBeN5aeVl6WN1xpr90g==
