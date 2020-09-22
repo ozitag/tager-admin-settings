@@ -43,6 +43,10 @@ export function getDynamicColumnDefinition(): ColumnDefinition<
           return 'image';
         case 'HTML':
           return 'html';
+        case 'COLOR':
+          return 'color';
+        case 'URL':
+          return 'link';
         default:
           return 'string';
       }
