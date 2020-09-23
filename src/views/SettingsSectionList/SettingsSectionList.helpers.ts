@@ -1,5 +1,5 @@
-import { ColumnDefinition } from '@tager/admin-ui';
-import { isFileObject } from '@tager/admin-services';
+import { ColumnDefinition, formatBoolean } from '@tager/admin-ui';
+import { isFileObject, isString } from '@tager/admin-services';
 
 import { SettingItemType } from '../../typings/model';
 import { getFileSize } from '../../utils/common';
@@ -41,8 +41,6 @@ export function getDynamicColumnDefinition(): ColumnDefinition<
       switch (row.config.type) {
         case 'IMAGE':
           return 'image';
-        case 'HTML':
-          return 'html';
         case 'COLOR':
           return 'color';
         case 'URL':
@@ -67,6 +65,20 @@ export function getDynamicColumnDefinition(): ColumnDefinition<
       if (row.config.type === 'REPEATER' && Array.isArray(row.value)) {
         const images = row.value;
         return `${images.length} item${images.length === 1 ? '' : 's'}`;
+      }
+
+      if (row.config.type === 'HTML') {
+        return row.value ? 'HTML Content' : '';
+      }
+
+      if (row.config.type === 'TEXT' && isString(row.value)) {
+        return row.value.length > 100
+          ? row.value.slice(0, 100) + '...'
+          : row.value;
+      }
+
+      if (row.config.type === 'TRUE_FALSE') {
+        return formatBoolean(row.value);
       }
 
       return row.value;
