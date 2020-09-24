@@ -1,5 +1,11 @@
-import { ColumnDefinition, formatBoolean } from '@tager/admin-ui';
-import { isFileObject, isString } from '@tager/admin-services';
+import {
+  ColumnDefinition,
+  formatBoolean,
+  formatDate,
+  formatDateTime,
+} from '@tager/admin-ui';
+import { isFileObject, isNotFalsy, isString } from '@tager/admin-services';
+import { ButtonField } from '@tager/admin-dynamic-field';
 
 import { SettingItemType } from '../../typings/model';
 import { getFileSize } from '../../utils/common';
@@ -71,10 +77,42 @@ export function getDynamicColumnDefinition(): ColumnDefinition<
         return row.value ? 'HTML Content' : '';
       }
 
+      if (row.config.type === 'DATE' && isString(row.value)) {
+        const date = new Date(row.value);
+        const isValid = !Number.isNaN(date.valueOf());
+
+        if (isValid) {
+          return formatDate(date);
+        }
+      }
+
+      if (row.config.type === 'DATETIME' && isString(row.value)) {
+        const date = new Date(row.value);
+        const isValid = !Number.isNaN(date.valueOf());
+
+        if (isValid) {
+          return formatDateTime(date);
+        }
+      }
+
       if (row.config.type === 'TEXT' && isString(row.value)) {
         return row.value.length > 100
           ? row.value.slice(0, 100) + '...'
           : row.value;
+      }
+
+      if (row.config.type === 'BUTTON') {
+        const button = row.value as ButtonField['value'];
+
+        if (button) {
+          return [
+            `Label: "${button.label}".`,
+            `Link: "${button.link}".`,
+            button.isNewTab ? '(Open in new tab)' : null,
+          ]
+            .filter(isNotFalsy)
+            .join(' ');
+        }
       }
 
       if (row.config.type === 'TRUE_FALSE') {
