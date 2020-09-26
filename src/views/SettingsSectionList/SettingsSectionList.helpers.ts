@@ -4,8 +4,13 @@ import {
   formatDate,
   formatDateTime,
 } from '@tager/admin-ui';
-import { isFileObject, isNotFalsy, isString } from '@tager/admin-services';
-import { ButtonField } from '@tager/admin-dynamic-field';
+import {
+  isFileObject,
+  isNonNullObject,
+  isNotFalsy,
+  isString,
+} from '@tager/admin-services';
+import { ButtonField, MapField } from '@tager/admin-dynamic-field';
 
 import { SettingItemType } from '../../typings/model';
 import { getFileSize } from '../../utils/common';
@@ -112,6 +117,14 @@ export function getDynamicColumnDefinition(): ColumnDefinition<
           ]
             .filter(isNotFalsy)
             .join(' ');
+        }
+      }
+
+      if (row.config.type === 'MAP') {
+        const coordinates = row.value as MapField['value'];
+
+        if (isNonNullObject(coordinates)) {
+          return `Latitude: "${coordinates.latitude}", Longitude: "${coordinates?.longitude}"`;
         }
       }
 
