@@ -134,5 +134,8 @@ export function getDynamicColumnDefinition(): ColumnDefinition<
 
       return row.value;
     },
+    options: {
+      justifyContent: 'flex-start',
+    },
   };
 }
