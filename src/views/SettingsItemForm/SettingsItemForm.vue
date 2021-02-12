@@ -73,7 +73,7 @@ export default defineComponent({
       values.value = getSettingsFormValues(settingItem.value);
     });
 
-    function submitForm() {
+    function submitForm({ shouldExit }: { shouldExit: boolean }) {
       isSubmitting.value = true;
 
       const body: SettingsItemUpdatePayload = convertSettingItemFormValuesToUpdatePayload(
@@ -83,7 +83,10 @@ export default defineComponent({
       updateSettingsItem(settingItemId.value, body)
         .then(() => {
           errors.value = {};
-          context.root.$router.push(getSettingItemListUrl());
+
+          if (shouldExit) {
+            context.root.$router.push(getSettingItemListUrl());
+          }
 
           context.root.$toast({
             variant: 'success',
