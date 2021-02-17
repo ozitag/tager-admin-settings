@@ -1,28 +1,42 @@
 <template>
   <li class="settings-section">
-    <div v-if="!shouldAlwaysDisplay" class="title-row" @click="toggleOpen">
-      <h3 v-if="section.name">{{ section.name }}</h3>
-      <base-button variant="icon">
-        <svg-icon :name="isOpen ? 'expandLess' : 'expandMore'" />
-      </base-button>
-    </div>
-    <base-table
-      v-show="isOpen"
-      :column-defs="columnDefs"
-      :row-data="rowData"
-      :loading="isRowDataLoading"
-      enumerable
+    <button
+      v-if="!shouldAlwaysDisplay"
+      type="button"
+      :class="['title-button', isOpen ? 'collapse' : 'expand']"
+      :title="isOpen ? 'Collapse' : 'Expand'"
+      @click="toggleOpen"
     >
-      <template v-slot:cell(actions)="{ row }">
-        <base-button
-          variant="icon"
-          title="Edit"
-          :href="getSettingItemFormUrl({ itemId: row.id })"
-        >
-          <svg-icon name="edit"></svg-icon>
-        </base-button>
-      </template>
-    </base-table>
+      <span
+        role="img"
+        :class="['icon-chevron-right', { 'icon-expand-more': isOpen }]"
+      >
+        <svg-icon name="chevronRight" />
+      </span>
+
+      <span class="title">
+        {{ section.name }}
+      </span>
+    </button>
+
+    <div v-show="isOpen" class="content">
+      <base-table
+        :column-defs="columnDefs"
+        :row-data="rowData"
+        :loading="isRowDataLoading"
+        enumerable
+      >
+        <template v-slot:cell(actions)="{ row }">
+          <base-button
+            variant="icon"
+            title="Edit"
+            :href="getSettingItemFormUrl({ itemId: row.id })"
+          >
+            <svg-icon name="edit"></svg-icon>
+          </base-button>
+        </template>
+      </base-table>
+    </div>
   </li>
 </template>
 
@@ -97,20 +111,50 @@ export default defineComponent<Props>({
 
 <style scoped lang="scss">
 .settings-section {
-  &:not(:last-child) {
-    margin-bottom: 2rem;
-  }
+  margin-bottom: 1rem;
 
-  .title-row {
+  .title-button {
     display: inline-flex;
     align-items: center;
-    margin-bottom: 0.3rem;
+    color: inherit;
+    margin-left: -0.375rem;
+    transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
     &:hover {
       cursor: pointer;
-
-      color: #888;
     }
+
+    &.collapse {
+      color: var(--primary);
+
+      .icon-expand-more {
+        color: var(--primary);
+      }
+    }
+  }
+
+  .icon-chevron-right {
+    margin-right: 0.375rem;
+    color: var(--secondary);
+    transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+    svg {
+      display: block;
+      fill: currentColor;
+      will-change: transform;
+      transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 0.24s;
+    }
+
+    &.icon-expand-more {
+      svg {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .content {
+    margin: 1rem 0 2rem 0;
+    padding: 0 1.5rem;
   }
 }
 </style>
