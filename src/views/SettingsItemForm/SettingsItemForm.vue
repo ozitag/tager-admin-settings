@@ -4,7 +4,7 @@
     :is-content-loading="isContentLoading"
     :footer="{
       backHref: settingsItemListRoutePath,
-      backLabel: 'Back to Common settings',
+      backLabel: t('settings:backToCommonSettings'),
       onSubmit: submitForm,
       isSubmitting: isSubmitting,
     }"
@@ -21,11 +21,13 @@ import {
   defineComponent,
   onMounted,
   ref,
+  SetupContext,
   watch,
 } from '@vue/composition-api';
 
 import { convertRequestErrorToMap, useResource } from '@tager/admin-services';
 import { DynamicField } from '@tager/admin-dynamic-field';
+import { useTranslation } from '@tager/admin-ui';
 
 import {
   getSettingsItem,
@@ -43,10 +45,13 @@ import {
 export default defineComponent({
   name: 'SettingsItemForm',
   components: { DynamicField },
-  setup(props, context) {
+  setup(props, context: SetupContext) {
+    const { t } = useTranslation(context);
+
     const settingItemId = computed<string>(
       () => context.root.$route.params.itemId
     );
+
     const [
       fetchSettingItem,
       { data: settingItem, loading: isSettingItemLoading },
@@ -90,8 +95,8 @@ export default defineComponent({
 
           context.root.$toast({
             variant: 'success',
-            title: 'Success',
-            body: 'Settings have been successfully updated',
+            title: t('settings:success'),
+            body: t('settings:settingsHaveBeenSuccessfullyUpdated'),
           });
         })
         .catch((error) => {
@@ -99,8 +104,8 @@ export default defineComponent({
           errors.value = convertRequestErrorToMap(error);
           context.root.$toast({
             variant: 'danger',
-            title: 'Error',
-            body: 'Settings update have been failed',
+            title: t('settings:error'),
+            body: t('settings:settingsUpdateHaveBeenFailed'),
           });
         })
         .finally(() => {
@@ -117,6 +122,7 @@ export default defineComponent({
     );
 
     return {
+      t,
       pageTitle,
       isContentLoading,
       settingsItemListRoutePath: getSettingItemListUrl(),

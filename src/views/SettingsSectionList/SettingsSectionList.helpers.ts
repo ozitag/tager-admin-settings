@@ -1,3 +1,5 @@
+import { TFunction } from 'i18next';
+
 import {
   ColumnDefinition,
   formatBoolean,
@@ -41,12 +43,12 @@ export function toggleSection(sectionName: string): void {
   localStorage.setItem(KEY, updatedSectionList.toString());
 }
 
-export function getDynamicColumnDefinition(): ColumnDefinition<
-  SettingItemType
-> {
+export function getDynamicColumnDefinition(
+  t: TFunction
+): ColumnDefinition<SettingItemType> {
   return {
     id: 2,
-    name: 'Value',
+    name: t('settings:value'),
     field: 'value',
     type: ({ row }) => {
       switch (row.config.type) {

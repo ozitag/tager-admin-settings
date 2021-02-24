@@ -5,24 +5,29 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent, SetupContext } from '@vue/composition-api';
 
 import { MenuItemType } from '@tager/admin-layout';
+import { useTranslation } from '@tager/admin-ui';
 
 import { getSettingItemListUrl } from '../utils/paths';
 
-export const COMMON_SETTINGS_MENU_ITEM: MenuItemType = {
-  id: 'settings',
-  text: 'Common Settings',
-  url: getSettingItemListUrl(),
-  icon: 'settings',
-};
-
-export default Vue.extend({
+export default defineComponent({
   name: 'App',
-  data(): { sidebarMenuList: Array<MenuItemType> } {
+  setup(props, context: SetupContext) {
+    const { t } = useTranslation(context);
+
+    const sidebarMenuList: Array<MenuItemType> = [
+      {
+        id: 'settings',
+        text: t('settings:commonSettings'),
+        url: getSettingItemListUrl(),
+        icon: 'settings',
+      },
+    ];
+
     return {
-      sidebarMenuList: [COMMON_SETTINGS_MENU_ITEM],
+      sidebarMenuList,
     };
   },
 });
