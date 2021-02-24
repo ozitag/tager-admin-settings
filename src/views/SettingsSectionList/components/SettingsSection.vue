@@ -29,7 +29,7 @@
         <template v-slot:cell(actions)="{ row }">
           <base-button
             variant="icon"
-            title="Edit"
+            :title="t('settings:edit')"
             :href="getSettingItemFormUrl({ itemId: row.id })"
           >
             <svg-icon name="edit"></svg-icon>
@@ -41,9 +41,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from '@vue/composition-api';
+import {
+  computed,
+  defineComponent,
+  ref,
+  SetupContext,
+} from '@vue/composition-api';
 
-import { ColumnDefinition } from '@tager/admin-ui';
+import { ColumnDefinition, useTranslation } from '@tager/admin-ui';
 
 import { SettingItemType, SettingsSectionType } from '../../../typings/model';
 import { getSettingItemFormUrl } from '../../../utils/paths';
@@ -52,25 +57,6 @@ import {
   isSectionOpen,
   toggleSection,
 } from '../SettingsSectionList.helpers';
-
-const COLUMN_DEFS: Array<ColumnDefinition<SettingItemType>> = [
-  {
-    id: 1,
-    name: 'Name',
-    field: 'label',
-    format: ({ row }) => row.config.label,
-    style: { width: '350px' },
-    headStyle: { width: '350px' },
-  },
-  getDynamicColumnDefinition(),
-  {
-    id: 3,
-    name: 'Actions',
-    field: 'actions',
-    style: { width: '80px', textAlign: 'center' },
-    headStyle: { width: '80px', textAlign: 'center' },
-  },
-];
 
 type Props = Readonly<{
   section: SettingsSectionType;
@@ -84,7 +70,9 @@ export default defineComponent<Props>({
       required: true,
     },
   },
-  setup(props) {
+  setup(props: Props, context: SetupContext) {
+    const { t } = useTranslation(context);
+
     const shouldAlwaysDisplay = computed<boolean>(() => !props.section.name);
 
     const isOpen = ref<boolean>(
@@ -96,10 +84,30 @@ export default defineComponent<Props>({
       toggleSection(props.section.name);
     }
 
+    const columnDefs: Array<ColumnDefinition<SettingItemType>> = [
+      {
+        id: 1,
+        name: t('settings:name'),
+        field: 'label',
+        format: ({ row }) => row.config.label,
+        style: { width: '350px' },
+        headStyle: { width: '350px' },
+      },
+      getDynamicColumnDefinition(t),
+      {
+        id: 3,
+        name: t('settings:actions'),
+        field: 'actions',
+        style: { width: '80px', textAlign: 'center' },
+        headStyle: { width: '80px', textAlign: 'center' },
+      },
+    ];
+
     return {
+      t,
       rowData: props.section.fields,
       isRowDataLoading: false,
-      columnDefs: COLUMN_DEFS,
+      columnDefs,
       getSettingItemFormUrl,
       isOpen,
       toggleOpen,

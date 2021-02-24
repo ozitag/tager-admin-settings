@@ -1,5 +1,5 @@
 <template>
-  <page title="Settings" :is-content-loading="isContentLoading">
+  <page :title="t('settings:settings')" :is-content-loading="isContentLoading">
     <ul>
       <SettingsSection
         v-for="(section, index) of settingsSectionList"
@@ -11,9 +11,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from '@vue/composition-api';
+import { defineComponent, onMounted, SetupContext } from '@vue/composition-api';
 
 import { useResource } from '@tager/admin-services';
+import { useTranslation } from '@tager/admin-ui';
 
 import { getSettingsSectionList } from '../../services/requests';
 import { SettingsSectionType } from '../../typings/model';
@@ -23,7 +24,9 @@ import SettingsSection from './components/SettingsSection.vue';
 export default defineComponent({
   name: 'SettingsSectionList',
   components: { SettingsSection },
-  setup(props, context) {
+  setup(props, context: SetupContext) {
+    const { t } = useTranslation(context);
+
     const [
       fetchSettingsSectionList,
       { data: settingsSectionList, loading: isSettingsSectionListLoading },
@@ -39,6 +42,7 @@ export default defineComponent({
     });
 
     return {
+      t,
       settingsSectionList,
       isContentLoading: isSettingsSectionListLoading,
     };
