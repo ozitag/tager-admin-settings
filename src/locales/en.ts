@@ -6,13 +6,12 @@ const EN = {
   name: 'Name',
   actions: 'Actions',
   value: 'Value',
-  backToCommonSettings: 'Back to Common settings',
+  back: 'Back',
   success: 'Success',
-  settingsHaveBeenSuccessfullyUpdated:
-    'Settings have been successfully updated',
+  settingsHaveBeenSuccessfullyUpdated: 'Settings have been successfully updated',
   error: 'Error',
   settingsUpdateHaveBeenFailed: 'Settings update have been failed',
-  commonSettingsForm: 'Common settings form',
+  commonSettingsForm: 'Param form'
 };
 
 export default EN;

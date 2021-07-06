@@ -4,7 +4,7 @@
     :is-content-loading="isContentLoading"
     :footer="{
       backHref: settingsItemListRoutePath,
-      backLabel: t('settings:backToCommonSettings'),
+      backLabel: t('settings:back'),
       onSubmit: submitForm,
       isSubmitting: isSubmitting,
     }"

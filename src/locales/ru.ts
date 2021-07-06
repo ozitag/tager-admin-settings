@@ -8,12 +8,12 @@ const RU: typeof EN = {
   name: 'Имя',
   actions: 'Действия',
   value: 'Значение',
-  backToCommonSettings: 'Вернуться к общим настройкам',
+  back: 'Назад',
   success: 'Успех',
   settingsHaveBeenSuccessfullyUpdated: 'Настройки успешно обновлены',
   error: 'Ошибка',
-  settingsUpdateHaveBeenFailed: 'Не удалось обновить настройки',
-  commonSettingsForm: 'Форма общих настроек',
+  settingsUpdateHaveBeenFailed: 'Ошибка сохранения',
+  commonSettingsForm: 'Форма параметра'
 };
 
 export default RU;
