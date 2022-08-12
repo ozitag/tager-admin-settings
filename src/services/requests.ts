@@ -1,14 +1,14 @@
-import { request, ResponseBody } from '@tager/admin-services';
-import { OutgoingValueUnion } from '@tager/admin-dynamic-field';
+import { request, ResponseBody } from "@tager/admin-services";
+import { OutgoingValueUnion } from "@tager/admin-dynamic-field";
 
-import { SettingItemType, SettingsSectionType } from '../typings/model';
+import { SettingItemType, SettingsSectionType } from "../typings/model";
 
 /** Blog Posts */
 
 export function getSettingsSectionList(): Promise<
   ResponseBody<Array<SettingsSectionType>>
 > {
-  return request.get({ path: '/admin/settings' });
+  return request.get({ path: "/admin/settings" });
 }
 
 export function getSettingsItem(

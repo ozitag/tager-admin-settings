@@ -11,7 +11,7 @@
         role="img"
         :class="['icon-chevron-right', { 'icon-expand-more': isOpen }]"
       >
-        <svg-icon name="chevronRight" />
+        <ChevronRightIcon />
       </span>
 
       <span class="title">
@@ -20,58 +20,57 @@
     </button>
 
     <div v-show="isOpen" class="content">
-      <base-table
+      <BaseTable
         :column-defs="columnDefs"
         :row-data="rowData"
         :loading="isRowDataLoading"
         enumerable
       >
-        <template v-slot:cell(actions)="{ row }">
-          <base-button
+        <template #cell(actions)="{ row }">
+          <BaseButton
             variant="icon"
-            :title="t('settings:edit')"
+            :title="$i18n.t('settings:edit')"
             :href="getSettingItemFormUrl({ itemId: row.id })"
           >
-            <svg-icon name="edit"></svg-icon>
-          </base-button>
+            <EditIcon />
+          </BaseButton>
         </template>
-      </base-table>
+      </BaseTable>
     </div>
   </li>
 </template>
 
 <script lang="ts">
+import { computed, defineComponent, ref } from "vue";
+
 import {
-  computed,
-  defineComponent,
-  ref,
-  SetupContext,
-} from '@vue/composition-api';
+  BaseButton,
+  BaseTable,
+  ChevronRightIcon,
+  ColumnDefinition,
+  EditIcon,
+} from "@tager/admin-ui";
+import { useI18n } from "@tager/admin-services";
 
-import { ColumnDefinition, useTranslation } from '@tager/admin-ui';
-
-import { SettingItemType, SettingsSectionType } from '../../../typings/model';
-import { getSettingItemFormUrl } from '../../../utils/paths';
+import { SettingItemType } from "../../../typings/model";
+import { getSettingItemFormUrl } from "../../../utils/paths";
 import {
   getDynamicColumnDefinition,
   isSectionOpen,
   toggleSection,
-} from '../SettingsSectionList.helpers';
+} from "../SettingsSectionList.helpers";
 
-type Props = Readonly<{
-  section: SettingsSectionType;
-}>;
-
-export default defineComponent<Props>({
-  name: 'SettingsSection',
+export default defineComponent({
+  name: "SettingsSection",
+  components: { EditIcon, BaseButton, BaseTable, ChevronRightIcon },
   props: {
     section: {
       type: Object,
       required: true,
     },
   },
-  setup(props: Props, context: SetupContext) {
-    const { t } = useTranslation(context);
+  setup(props) {
+    const { t } = useI18n();
 
     const shouldAlwaysDisplay = computed<boolean>(() => !props.section.name);
 
@@ -87,19 +86,19 @@ export default defineComponent<Props>({
     const columnDefs: Array<ColumnDefinition<SettingItemType>> = [
       {
         id: 1,
-        name: t('settings:name'),
-        field: 'label',
+        name: t("settings:name"),
+        field: "label",
         format: ({ row }) => row.config.label,
-        style: { width: '350px' },
-        headStyle: { width: '350px' },
+        style: { width: "350px" },
+        headStyle: { width: "350px" },
       },
       getDynamicColumnDefinition(t),
       {
         id: 3,
-        name: t('settings:actions'),
-        field: 'actions',
-        style: { width: '80px', textAlign: 'center' },
-        headStyle: { width: '80px', textAlign: 'center' },
+        name: t("settings:actions"),
+        field: "actions",
+        style: { width: "80px", textAlign: "center" },
+        headStyle: { width: "80px", textAlign: "center" },
       },
     ];
 

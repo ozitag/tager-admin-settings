@@ -1,64 +1,69 @@
 <template>
-  <page
-    :title="pageTitle"
-    :is-content-loading="isContentLoading"
-    :footer="{
-      backHref: settingsItemListRoutePath,
-      backLabel: t('settings:back'),
-      onSubmit: submitForm,
-      isSubmitting: isSubmitting,
-    }"
-  >
+  <Page :title="pageTitle" :is-content-loading="isContentLoading">
     <form novalidate @submit.prevent>
       <DynamicField v-if="values" :field="values" />
     </form>
-  </page>
+
+    <template #footer>
+      <FormFooter
+        :back-href="settingsItemListRoutePath"
+        :is-submitting="isSubmitting"
+        @submit="submitForm"
+      />
+    </template>
+  </Page>
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  ref,
-  SetupContext,
-  watch,
-} from '@vue/composition-api';
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-import { convertRequestErrorToMap, useResource } from '@tager/admin-services';
-import { DynamicField } from '@tager/admin-dynamic-field';
-import { useTranslation } from '@tager/admin-ui';
+import {
+  convertRequestErrorToMap,
+  navigateBack,
+  useResource,
+  useToast,
+} from "@tager/admin-services";
+import { DynamicField } from "@tager/admin-dynamic-field";
+import { useI18n } from "@tager/admin-services";
+import { Page } from "@tager/admin-layout";
+import { FormFooter, TagerFormSubmitEvent } from "@tager/admin-ui";
 
 import {
   getSettingsItem,
   SettingsItemUpdatePayload,
   updateSettingsItem,
-} from '../../services/requests';
-import { getSettingItemListUrl } from '../../utils/paths';
+} from "../../services/requests";
+import { getSettingItemListUrl } from "../../utils/paths";
 
 import {
   convertSettingItemFormValuesToUpdatePayload,
   FormValues,
   getSettingsFormValues,
-} from './SettingsItemForm.helpers';
+} from "./SettingsItemForm.helpers";
 
 export default defineComponent({
-  name: 'SettingsItemForm',
-  components: { DynamicField },
-  setup(props, context: SetupContext) {
-    const { t } = useTranslation(context);
+  name: "SettingsItemForm",
+  components: { FormFooter, Page, DynamicField },
+  setup() {
+    const { t } = useI18n();
 
-    const settingItemId = computed<string>(
-      () => context.root.$route.params.itemId
+    const route = useRoute();
+    const router = useRouter();
+    const toast = useToast();
+
+    const settingItemId = computed(
+      () => route.params.itemId as string | undefined
     );
+
+    if (!settingItemId.value) return null;
 
     const [
       fetchSettingItem,
       { data: settingItem, loading: isSettingItemLoading },
     ] = useResource({
-      fetchResource: () => getSettingsItem(settingItemId.value),
-      context,
-      resourceName: 'Setting item',
+      fetchResource: () => getSettingsItem(settingItemId.value || ""),
+      resourceName: "Setting item",
       initialValue: null,
     });
 
@@ -78,34 +83,33 @@ export default defineComponent({
       values.value = getSettingsFormValues(settingItem.value);
     });
 
-    function submitForm({ shouldExit }: { shouldExit: boolean }) {
+    function submitForm(event: TagerFormSubmitEvent) {
       isSubmitting.value = true;
 
-      const body: SettingsItemUpdatePayload = convertSettingItemFormValuesToUpdatePayload(
-        values.value
-      );
+      const body: SettingsItemUpdatePayload =
+        convertSettingItemFormValuesToUpdatePayload(values.value);
 
-      updateSettingsItem(settingItemId.value, body)
+      updateSettingsItem(settingItemId.value || "", body)
         .then(() => {
           errors.value = {};
 
-          if (shouldExit) {
-            context.root.$router.push(getSettingItemListUrl());
+          if (event.type === "create_exit" || event.type === "save_exit") {
+            navigateBack(router, getSettingItemListUrl());
           }
 
-          context.root.$toast({
-            variant: 'success',
-            title: t('settings:success'),
-            body: t('settings:settingsHaveBeenSuccessfullyUpdated'),
+          toast.show({
+            variant: "success",
+            title: t("settings:success"),
+            body: t("settings:settingsHaveBeenSuccessfullyUpdated"),
           });
         })
         .catch((error) => {
           console.error(error);
           errors.value = convertRequestErrorToMap(error);
-          context.root.$toast({
-            variant: 'danger',
-            title: t('settings:error'),
-            body: t('settings:settingsUpdateHaveBeenFailed'),
+          toast.show({
+            variant: "danger",
+            title: t("settings:error"),
+            body: t("settings:settingsUpdateHaveBeenFailed"),
           });
         })
         .finally(() => {
@@ -114,7 +118,7 @@ export default defineComponent({
     }
 
     const pageTitle = computed<string>(
-      () => settingItem.value?.config.label ?? ''
+      () => settingItem.value?.config.label ?? ""
     );
 
     const isContentLoading = computed<boolean>(

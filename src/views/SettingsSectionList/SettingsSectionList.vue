@@ -1,5 +1,8 @@
 <template>
-  <page :title="t('settings:settings')" :is-content-loading="isContentLoading">
+  <Page
+    :title="$i18n.t('settings:settings')"
+    :is-content-loading="isContentLoading"
+  >
     <ul>
       <SettingsSection
         v-for="(section, index) of settingsSectionList"
@@ -7,25 +10,25 @@
         :section="section"
       />
     </ul>
-  </page>
+  </Page>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, SetupContext } from '@vue/composition-api';
+import { defineComponent, onMounted } from "vue";
 
-import { useResource } from '@tager/admin-services';
-import { useTranslation } from '@tager/admin-ui';
+import { useResource, useI18n } from "@tager/admin-services";
+import { Page } from "@tager/admin-layout";
 
-import { getSettingsSectionList } from '../../services/requests';
-import { SettingsSectionType } from '../../typings/model';
+import { getSettingsSectionList } from "../../services/requests";
+import { SettingsSectionType } from "../../typings/model";
 
-import SettingsSection from './components/SettingsSection.vue';
+import SettingsSection from "./components/SettingsSection.vue";
 
 export default defineComponent({
-  name: 'SettingsSectionList',
-  components: { SettingsSection },
-  setup(props, context: SetupContext) {
-    const { t } = useTranslation(context);
+  name: "SettingsSectionList",
+  components: { Page, SettingsSection },
+  setup() {
+    const { t } = useI18n();
 
     const [
       fetchSettingsSectionList,
@@ -33,8 +36,7 @@ export default defineComponent({
     ] = useResource<Array<SettingsSectionType>>({
       fetchResource: getSettingsSectionList,
       initialValue: [],
-      context,
-      resourceName: 'Settings section list',
+      resourceName: "Settings section list",
     });
 
     onMounted(() => {

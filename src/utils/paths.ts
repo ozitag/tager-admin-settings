@@ -1,6 +1,6 @@
-import { compile } from 'path-to-regexp';
+import { compile } from "path-to-regexp";
 
-import { COMMON_SETTINGS_ROUTE_PATHS } from '../constants/paths';
+import { COMMON_SETTINGS_ROUTE_PATHS } from "../constants/paths";
 
 export function getSettingItemListUrl(): string {
   return COMMON_SETTINGS_ROUTE_PATHS.ITEM_LIST;

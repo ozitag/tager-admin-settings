@@ -1,8 +1,8 @@
-import { Nullable } from '@tager/admin-services';
-import { FieldUnion, universalFieldUtils } from '@tager/admin-dynamic-field';
+import { Nullable } from "@tager/admin-services";
+import { FieldUnion, universalFieldUtils } from "@tager/admin-dynamic-field";
 
-import { SettingItemType } from '../../typings/model';
-import { SettingsItemUpdatePayload } from '../../services/requests';
+import { SettingItemType } from "../../typings/model";
+import { SettingsItemUpdatePayload } from "../../services/requests";
 
 export type FormValues = Nullable<FieldUnion>;
 
@@ -25,7 +25,7 @@ export function convertSettingItemFormValuesToUpdatePayload(
   values: FormValues
 ): SettingsItemUpdatePayload {
   if (!values) {
-    throw new Error('values cannot be null');
+    throw new Error("values cannot be null");
   }
 
   return { value: universalFieldUtils.getOutgoingValue(values) };

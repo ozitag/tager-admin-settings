@@ -1,1 +1,1 @@
-export { default } from './SettingsItemForm.vue';
+export { default } from "./SettingsItemForm.vue";
