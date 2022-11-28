@@ -1,73 +1,43 @@
 <template>
-  <li class="settings-section">
-    <div v-if="shouldAlwaysDisplay">
-      <BaseTable
-        :column-defs="columnDefs"
-        :row-data="rowData"
-        :loading="isRowDataLoading"
-        enumerable
+  <BaseTable
+    :column-defs="columnDefs"
+    :row-data="rowData"
+    :loading="isRowDataLoading"
+    enumerable
+  >
+    <template #cell(actions)="{ row }">
+      <BaseButton
+        variant="icon"
+        :title="$i18n.t('settings:edit')"
+        :href="getSettingItemFormUrl({ itemId: row.id })"
       >
-        <template #cell(actions)="{ row }">
-          <BaseButton
-            variant="icon"
-            :title="$i18n.t('settings:edit')"
-            :href="getSettingItemFormUrl({ itemId: row.id })"
-          >
-            <EditIcon />
-          </BaseButton>
-        </template>
-      </BaseTable>
-    </div>
-    <div v-else>
-      <ToggleSection :name="section.name" :opened-by-default="isOpenByDefault">
-        <BaseTable
-          :column-defs="columnDefs"
-          :row-data="rowData"
-          :loading="isRowDataLoading"
-          enumerable
-        >
-          <template #cell(actions)="{ row }">
-            <BaseButton
-              variant="icon"
-              :title="$i18n.t('settings:edit')"
-              :href="getSettingItemFormUrl({ itemId: row.id })"
-            >
-              <EditIcon />
-            </BaseButton>
-          </template>
-        </BaseTable>
-      </ToggleSection>
-    </div>
-  </li>
+        <EditIcon />
+      </BaseButton>
+    </template>
+  </BaseTable>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 import {
   BaseButton,
   BaseTable,
   ColumnDefinition,
   EditIcon,
-  ToggleSection,
 } from "@tager/admin-ui";
 import { useI18n } from "@tager/admin-services";
 
 import { SettingItemType } from "../../../typings/model";
 import { getSettingItemFormUrl } from "../../../utils/paths";
-import {
-  getDynamicColumnDefinition,
-  isSectionOpen,
-  toggleSection,
-} from "../SettingsSectionList.helpers";
+import { getDynamicColumnDefinition } from "../SettingsSectionList.helpers";
 
 export default defineComponent({
-  name: "SettingsSection",
+  name: "SettingsSectionInner",
   components: {
     EditIcon,
     BaseButton,
     BaseTable,
-    ToggleSection,
   },
   props: {
     section: {
@@ -77,12 +47,6 @@ export default defineComponent({
   },
   setup(props) {
     const { t } = useI18n();
-
-    const shouldAlwaysDisplay = computed<boolean>(() => !props.section.name);
-
-    const isOpen = ref<boolean>(
-      shouldAlwaysDisplay.value || isSectionOpen(props.section.name)
-    );
 
     const columnDefs: Array<ColumnDefinition<SettingItemType>> = [
       {
@@ -109,8 +73,6 @@ export default defineComponent({
       isRowDataLoading: false,
       columnDefs,
       getSettingItemFormUrl,
-      isOpenByDefault: isSectionOpen(props.section.name),
-      shouldAlwaysDisplay,
     };
   },
 });

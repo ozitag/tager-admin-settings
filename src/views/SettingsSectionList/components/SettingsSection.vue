@@ -1,25 +1,6 @@
 <template>
   <li class="settings-section">
-    <button
-      v-if="!shouldAlwaysDisplay"
-      type="button"
-      :class="['title-button', isOpen ? 'collapse' : 'expand']"
-      :title="isOpen ? 'Collapse' : 'Expand'"
-      @click="toggleOpen"
-    >
-      <span
-        role="img"
-        :class="['icon-chevron-right', { 'icon-expand-more': isOpen }]"
-      >
-        <ChevronRightIcon />
-      </span>
-
-      <span class="title">
-        {{ section.name }}
-      </span>
-    </button>
-
-    <div v-show="isOpen" class="content">
+    <div v-if="shouldAlwaysDisplay">
       <BaseTable
         :column-defs="columnDefs"
         :row-data="rowData"
@@ -37,6 +18,26 @@
         </template>
       </BaseTable>
     </div>
+    <div v-else>
+      <ToggleSection :label="section.name" :opened-by-default="isOpenByDefault">
+        <BaseTable
+          :column-defs="columnDefs"
+          :row-data="rowData"
+          :loading="isRowDataLoading"
+          enumerable
+        >
+          <template #cell(actions)="{ row }">
+            <BaseButton
+              variant="icon"
+              :title="$i18n.t('settings:edit')"
+              :href="getSettingItemFormUrl({ itemId: row.id })"
+            >
+              <EditIcon />
+            </BaseButton>
+          </template>
+        </BaseTable>
+      </ToggleSection>
+    </div>
   </li>
 </template>
 
@@ -46,9 +47,9 @@ import { computed, defineComponent, ref } from "vue";
 import {
   BaseButton,
   BaseTable,
-  ChevronRightIcon,
   ColumnDefinition,
   EditIcon,
+  ToggleSection,
 } from "@tager/admin-ui";
 import { useI18n } from "@tager/admin-services";
 
@@ -60,9 +61,17 @@ import {
   toggleSection,
 } from "../SettingsSectionList.helpers";
 
+import SettingsSectionInner from "./SettingsSectionInner.vue";
+
 export default defineComponent({
   name: "SettingsSection",
-  components: { EditIcon, BaseButton, BaseTable, ChevronRightIcon },
+  components: {
+    EditIcon,
+    BaseButton,
+    BaseTable,
+    ToggleSection,
+    SettingsSectionInner,
+  },
   props: {
     section: {
       type: Object,
@@ -73,15 +82,6 @@ export default defineComponent({
     const { t } = useI18n();
 
     const shouldAlwaysDisplay = computed<boolean>(() => !props.section.name);
-
-    const isOpen = ref<boolean>(
-      shouldAlwaysDisplay.value || isSectionOpen(props.section.name)
-    );
-
-    function toggleOpen() {
-      isOpen.value = !isOpen.value;
-      toggleSection(props.section.name);
-    }
 
     const columnDefs: Array<ColumnDefinition<SettingItemType>> = [
       {
@@ -108,8 +108,7 @@ export default defineComponent({
       isRowDataLoading: false,
       columnDefs,
       getSettingItemFormUrl,
-      isOpen,
-      toggleOpen,
+      isOpenByDefault: isSectionOpen(props.section.name),
       shouldAlwaysDisplay,
     };
   },
@@ -119,49 +118,5 @@ export default defineComponent({
 <style scoped lang="scss">
 .settings-section {
   margin-bottom: 1rem;
-
-  .title-button {
-    display: inline-flex;
-    align-items: center;
-    color: inherit;
-    margin-left: -0.375rem;
-    transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &.collapse {
-      color: var(--primary);
-
-      .icon-expand-more {
-        color: var(--primary);
-      }
-    }
-  }
-
-  .icon-chevron-right {
-    margin-right: 0.375rem;
-    color: var(--secondary);
-    transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-
-    svg {
-      display: block;
-      fill: currentColor;
-      will-change: transform;
-      transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 0.24s;
-    }
-
-    &.icon-expand-more {
-      svg {
-        transform: rotate(90deg);
-      }
-    }
-  }
-
-  .content {
-    margin: 1rem 0 2rem 0;
-    padding: 0 1.5rem;
-  }
 }
 </style>
