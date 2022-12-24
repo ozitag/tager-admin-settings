@@ -1,44 +1,39 @@
 <template>
-  <li class="settings-section">
-    <div v-if="shouldAlwaysDisplay">
-      <BaseTable
-        :column-defs="columnDefs"
-        :row-data="rowData"
-        :loading="isRowDataLoading"
-        enumerable
+  <BaseTable
+    :column-defs="columnDefs"
+    :row-data="rowData"
+    :loading="isRowDataLoading"
+    enumerable
+    v-if="shouldAlwaysDisplay"
+  >
+    <template #cell(actions)="{ row }">
+      <BaseButton
+        variant="icon"
+        :title="$i18n.t('settings:edit')"
+        :href="getSettingItemFormUrl({ itemId: row.id })"
       >
-        <template #cell(actions)="{ row }">
-          <BaseButton
-            variant="icon"
-            :title="$i18n.t('settings:edit')"
-            :href="getSettingItemFormUrl({ itemId: row.id })"
-          >
-            <EditIcon />
-          </BaseButton>
-        </template>
-      </BaseTable>
-    </div>
-    <div v-else>
-      <ToggleSection :label="section.name" :opened-by-default="isOpenByDefault">
-        <BaseTable
-          :column-defs="columnDefs"
-          :row-data="rowData"
-          :loading="isRowDataLoading"
-          enumerable
+        <EditIcon />
+      </BaseButton>
+    </template>
+  </BaseTable>
+  <ToggleSection :label="section.name" :opened-by-default="isOpenByDefault" v-else>
+    <BaseTable
+      :column-defs="columnDefs"
+      :row-data="rowData"
+      :loading="isRowDataLoading"
+      enumerable
+    >
+      <template #cell(actions)="{ row }">
+        <BaseButton
+          variant="icon"
+          :title="$i18n.t('settings:edit')"
+          :href="getSettingItemFormUrl({ itemId: row.id })"
         >
-          <template #cell(actions)="{ row }">
-            <BaseButton
-              variant="icon"
-              :title="$i18n.t('settings:edit')"
-              :href="getSettingItemFormUrl({ itemId: row.id })"
-            >
-              <EditIcon />
-            </BaseButton>
-          </template>
-        </BaseTable>
-      </ToggleSection>
-    </div>
-  </li>
+          <EditIcon />
+        </BaseButton>
+      </template>
+    </BaseTable>
+  </ToggleSection>
 </template>
 
 <script lang="ts">
@@ -49,7 +44,7 @@ import {
   BaseTable,
   ColumnDefinition,
   EditIcon,
-  ToggleSection,
+  ToggleSection
 } from "@tager/admin-ui";
 import { useI18n } from "@tager/admin-services";
 
@@ -58,7 +53,7 @@ import { getSettingItemFormUrl } from "../../../utils/paths";
 import {
   getDynamicColumnDefinition,
   isSectionOpen,
-  toggleSection,
+  toggleSection
 } from "../SettingsSectionList.helpers";
 
 import SettingsSectionInner from "./SettingsSectionInner.vue";
@@ -70,13 +65,13 @@ export default defineComponent({
     BaseButton,
     BaseTable,
     ToggleSection,
-    SettingsSectionInner,
+    SettingsSectionInner
   },
   props: {
     section: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
     const { t } = useI18n();
@@ -90,7 +85,7 @@ export default defineComponent({
         field: "label",
         format: ({ row }) => row.config.label,
         style: { width: "350px" },
-        headStyle: { width: "350px" },
+        headStyle: { width: "350px" }
       },
       getDynamicColumnDefinition(t),
       {
@@ -98,8 +93,8 @@ export default defineComponent({
         name: t("settings:actions"),
         field: "actions",
         style: { width: "80px", textAlign: "center" },
-        headStyle: { width: "80px", textAlign: "center" },
-      },
+        headStyle: { width: "80px", textAlign: "center" }
+      }
     ];
 
     return {
@@ -109,14 +104,10 @@ export default defineComponent({
       columnDefs,
       getSettingItemFormUrl,
       isOpenByDefault: isSectionOpen(props.section.name),
-      shouldAlwaysDisplay,
+      shouldAlwaysDisplay
     };
-  },
+  }
 });
 </script>
 
-<style scoped lang="scss">
-.settings-section {
-  margin-bottom: 1rem;
-}
-</style>
+<style scoped lang="scss"></style>

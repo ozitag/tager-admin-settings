@@ -1165,7 +1165,7 @@
   resolved "https://registry.yarnpkg.com/@tager/admin-layout/-/admin-layout-1.0.9.tgz#f533ac0bb62a77b1a3a2481be6ab7a808bd5e878"
   integrity sha512-Vtd31LnH/FsmS2gfrujhs51fPSwuFWsDfhhyw4qbjvj8HueNw3zAT0A2ieNuZneZbHgj8CKIIdJQhTtyVrGJ/A==
 
-"@tager/admin-services@1.1.9", "@tager/admin-services@^1.1.9":
+"@tager/admin-services@^1.1.9", "@tager/admin-services@workspace:*":
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/@tager/admin-services/-/admin-services-1.1.9.tgz#c224ccb94d9bb03c5af3d42454379fa3ca9bbf9b"
   integrity sha512-2fGqmCAWUFRzsn4BdwPd8Cgi8JbnigC0nIMek9IES0UCju3uSq+shNPKplAm95WqYNpEcJ1fV7c3HNvOUjiupQ==
@@ -1174,10 +1174,10 @@
     nanoid "^4.0.0"
     zod "^3.18.0"
 
-"@tager/admin-ui@^1.0.26":
-  version "1.0.26"
-  resolved "https://registry.yarnpkg.com/@tager/admin-ui/-/admin-ui-1.0.26.tgz#d6f03f908845644f88f1609e9e34f3af139d85df"
-  integrity sha512-ywIoSOd/j1wBONBSxhzF6k73xkKA2kOUnrrsDXDLlg36Ikp3UEBJiX9O+XR1oXiImh1+OCk4qe2wDLhmXTrdUA==
+"@tager/admin-ui@^1.0.30":
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/@tager/admin-ui/-/admin-ui-1.0.30.tgz#717e2fff703e245d47ea40f4bb1ffbe5949fd3da"
+  integrity sha512-6eKpevXF8hLWj/chAmV/wxFaBUJYHUuugAkXAsaEBysneyXAGPGOc+4E6cUAxvmn1xt8A0I6s4M+eVT3Mg9l2Q==
   dependencies:
     "@ckeditor/ckeditor5-vue" "^4.0.1"
     "@floating-ui/dom" "^0.4.5"

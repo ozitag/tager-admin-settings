@@ -3,13 +3,11 @@
     :title="$i18n.t('settings:settings')"
     :is-content-loading="isContentLoading"
   >
-    <ul>
-      <SettingsSection
-        v-for="(section, index) of settingsSectionList"
-        :key="index"
-        :section="section"
-      />
-    </ul>
+    <SettingsSection
+      v-for="(section, index) of settingsSectionList"
+      :key="index"
+      :section="section"
+    />
   </Page>
 </template>
 
