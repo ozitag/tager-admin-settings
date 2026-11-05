@@ -1,10 +1,10 @@
 <template>
   <BaseTable
+    v-if="shouldAlwaysDisplay"
     :column-defs="columnDefs"
     :row-data="rowData"
     :loading="isRowDataLoading"
     enumerable
-    v-if="shouldAlwaysDisplay"
   >
     <template #cell(actions)="{ row }">
       <BaseButton
@@ -16,7 +16,7 @@
       </BaseButton>
     </template>
   </BaseTable>
-  <ToggleSection :label="section.name" :opened-by-default="isOpenByDefault" v-else>
+  <ToggleSection v-else :label="section.name" :opened-by-default="isOpenByDefault">
     <BaseTable
       :column-defs="columnDefs"
       :row-data="rowData"
