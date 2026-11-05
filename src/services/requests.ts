@@ -1,7 +1,7 @@
-import { request, ResponseBody } from "@tager/admin-services";
-import { OutgoingValueUnion } from "@tager/admin-dynamic-field";
+import { request, type ResponseBody } from "@tager/admin-services";
+import { type OutgoingValueUnion } from "@tager/admin-dynamic-field";
 
-import { SettingItemType, SettingsSectionType } from "../typings/model";
+import { type SettingItemType, type SettingsSectionType } from "../typings/model";
 
 /** Blog Posts */
 

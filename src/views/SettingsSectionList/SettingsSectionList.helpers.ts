@@ -1,7 +1,7 @@
-import { TFunction } from "i18next";
+import { type TFunction } from "i18next";
 
 import {
-  ColumnDefinition,
+  type ColumnDefinition,
   formatBoolean,
   formatDate,
   formatDateTime,
@@ -12,9 +12,9 @@ import {
   isNotFalsy,
   isString,
 } from "@tager/admin-services";
-import { ButtonField, MapField } from "@tager/admin-dynamic-field";
+import { type ButtonField, type MapField } from "@tager/admin-dynamic-field";
 
-import { SettingItemType } from "../../typings/model";
+import { type SettingItemType } from "../../typings/model";
 import { getFileSize } from "../../utils/common";
 
 const KEY = "open_sections";

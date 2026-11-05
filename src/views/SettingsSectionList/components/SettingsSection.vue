@@ -42,13 +42,13 @@ import { computed, defineComponent, ref } from "vue";
 import {
   BaseButton,
   BaseTable,
-  ColumnDefinition,
+  type ColumnDefinition,
   EditIcon,
   ToggleSection
 } from "@tager/admin-ui";
 import { useI18n } from "@tager/admin-services";
 
-import { SettingItemType } from "../../../typings/model";
+import { type SettingItemType } from "../../../typings/model";
 import { getSettingItemFormUrl } from "../../../utils/paths";
 import {
   getDynamicColumnDefinition,

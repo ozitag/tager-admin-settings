@@ -18,7 +18,7 @@ import { useResource, useI18n } from "@tager/admin-services";
 import { Page } from "@tager/admin-layout";
 
 import { getSettingsSectionList } from "../../services/requests";
-import { SettingsSectionType } from "../../typings/model";
+import { type SettingsSectionType } from "../../typings/model";
 
 import SettingsSection from "./components/SettingsSection.vue";
 

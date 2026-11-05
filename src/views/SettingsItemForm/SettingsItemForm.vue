@@ -27,18 +27,18 @@ import {
 import { DynamicField } from "@tager/admin-dynamic-field";
 import { useI18n } from "@tager/admin-services";
 import { Page } from "@tager/admin-layout";
-import { FormFooter, TagerFormSubmitEvent } from "@tager/admin-ui";
+import { FormFooter, type TagerFormSubmitEvent } from "@tager/admin-ui";
 
 import {
   getSettingsItem,
-  SettingsItemUpdatePayload,
+  type SettingsItemUpdatePayload,
   updateSettingsItem,
 } from "../../services/requests";
 import { getSettingItemListUrl } from "../../utils/paths";
 
 import {
   convertSettingItemFormValuesToUpdatePayload,
-  FormValues,
+  type FormValues,
   getSettingsFormValues,
 } from "./SettingsItemForm.helpers";
 

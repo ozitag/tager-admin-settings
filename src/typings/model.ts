@@ -1,6 +1,6 @@
 import {
-  FieldConfigUnion,
-  IncomingValueUnion,
+  type FieldConfigUnion,
+  type IncomingValueUnion,
 } from "@tager/admin-dynamic-field";
 
 export type SettingItemType = {
